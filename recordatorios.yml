@@ -1,0 +1,18 @@
+name: Enviar Recordatorios
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Llamar Edge Function
+        run: |
+          curl -X POST \
+            "https://ilmvcenecwjpjaemrjjp.supabase.co/functions/v1/smooth-service" \
+            -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlsbXZjZW5lY3dqcGphZW1yampwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4NzU3ODcsImV4cCI6MjA4NzQ1MTc4N30.L7RF-QzehG-NnJJdT5yJzPXYn98-NFE9rZLnqbl0bf8" \
+            -H "Content-Type: application/json" \
+            -v
